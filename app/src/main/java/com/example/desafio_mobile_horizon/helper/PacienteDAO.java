@@ -60,7 +60,9 @@ public class PacienteDAO implements IPacienteDAO{
 
         List<Paciente> pacientes = new ArrayList<>();
 
-        String sql = "SELECT * FROM " + DbHelper.TABELA_PACIENTES + " ;";
+        //Essa string sql retornara os pacientes na seguinte ordem
+        // Quarentena -> Liberado -> Internado
+        String sql = "SELECT * FROM " + DbHelper.TABELA_PACIENTES + " WHERE 1=1 ORDER BY situacao ASC ;";
         Cursor c = le.rawQuery(sql, null);
 
         while(c.moveToNext()) {
