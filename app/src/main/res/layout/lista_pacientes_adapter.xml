@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textNome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:text="Estudar ANdroid"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/textIdade"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Idade" />
+
+    <TextView
+        android:id="@+id/textSituacao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Situation" />
+</LinearLayout>
