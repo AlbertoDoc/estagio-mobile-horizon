@@ -18,6 +18,7 @@ import android.widget.LinearLayout;
 import com.example.desafio_mobile_horizon.R;
 import com.example.desafio_mobile_horizon.adapter.PacienteAdapter;
 import com.example.desafio_mobile_horizon.helper.DbHelper;
+import com.example.desafio_mobile_horizon.helper.PacienteDAO;
 import com.example.desafio_mobile_horizon.helper.RecyclerItemClickListener;
 import com.example.desafio_mobile_horizon.model.Paciente;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -77,17 +78,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void carregarPacientes(){
         //Listar Pacientes
-        Paciente paciente1 = new Paciente();
-        paciente1.setNomePaciente("Joao");
-        paciente1.setIdade(25);
-        paciente1.setSituacao("Observação");
-        listaPacientes.add(paciente1);
-
-        Paciente paciente2 = new Paciente();
-        paciente2.setNomePaciente("Maria");
-        paciente2.setIdade(32);
-        paciente2.setSituacao("Quarentena");
-        listaPacientes.add(paciente2);
+        PacienteDAO pacienteDAO = new PacienteDAO(getApplicationContext());
+        listaPacientes = pacienteDAO.listar();
         //exibe lista de pacientes no RecyclerView
 
         //Configurar um adapter

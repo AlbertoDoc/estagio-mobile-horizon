@@ -1,5 +1,7 @@
 package com.example.desafio_mobile_horizon.adapter;
 
+import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +39,15 @@ public class PacienteAdapter extends RecyclerView.Adapter<PacienteAdapter.MyView
         holder.nome.setText(paciente.getNomePaciente());
         holder.idade.setText(String.valueOf(paciente.getIdade()));
         holder.situacao.setText(paciente.getSituacao());
+        if(paciente.getSituacao().equals("Internado")){
+            holder.situacao.setTextColor(Color.RED);
+        }
+        else if(paciente.getSituacao().equals("Liberado")){
+            holder.situacao.setTextColor(Color.parseColor("#42c22f"));
+        }
+        else if(paciente.getSituacao().equals("Quarentena")){
+            holder.situacao.setTextColor(Color.parseColor("#e3d539"));
+        }
     }
 
     @Override
