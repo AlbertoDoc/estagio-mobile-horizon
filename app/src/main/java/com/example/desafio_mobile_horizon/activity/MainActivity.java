@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -14,9 +15,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 
-import com.example.desafio_mobile_horizon.PacienteDatabase;
 import com.example.desafio_mobile_horizon.R;
 import com.example.desafio_mobile_horizon.adapter.PacienteAdapter;
+import com.example.desafio_mobile_horizon.helper.DbHelper;
 import com.example.desafio_mobile_horizon.helper.RecyclerItemClickListener;
 import com.example.desafio_mobile_horizon.model.Paciente;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -63,52 +64,6 @@ public class MainActivity extends AppCompatActivity {
                         }
                 )
         );
-
-        try {
-            //Criando banco de dados
-            SQLiteDatabase bancoDados = openOrCreateDatabase( "app", MODE_PRIVATE, null);
-
-            //Criar tabela
-            bancoDados.execSQL("CREATE TABLE IF NOT EXISTS pacientes (id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    "nome VARCHAR, idade INT(3), tempCorporal INT(2), perTosse INT(3)," +
-                    "perDorCabeca INT(3), semanaItalia INT(3), semanaChina INT(3)," +
-                    "semanaIndonesia INT(3), semanaPortugal INT(3), semanaEUA INT(3)," +
-                    "situacao VARCHAR)");
-
-
-            //Inserindo dados
-            //bancoDados.execSQL("INSERT INTO pacientes(nome, idade, tempCorporal, perTosse," +
-                    //"perDorCabeca, semanaItalia, semanaChina, semanaIndonesia, semanaPortugal," +
-                    //"semanaEUA, situacao) VALUES ('Alberto', 20, 1, 2, 3, 4, 5, 6, 7, 8, 'Quarentena')");
-
-            //bancoDados.execSQL("INSERT INTO pacientes(nome, idade, tempCorporal, perTosse," +
-                    //"perDorCabeca, semanaItalia, semanaChina, semanaIndonesia, semanaPortugal," +
-                    //"semanaEUA, situacao) VALUES ('Carol', 23, 2, 3, 4, 5, 6, 7, 8, 9, 'Livre')");
-
-            //bancoDados.execSQL("DELETE FROM pacientes WHERE id = 2");
-
-            //Recuperando dados
-            String consulta = "SELECT * FROM pacientes";
-            Cursor cursor = bancoDados.rawQuery(consulta, null);
-
-            //Indices da tabela
-            int indiceId = cursor.getColumnIndex("id");
-            int indiceNome = cursor.getColumnIndex("nome");
-            int indiceIdade = cursor.getColumnIndex("idade");
-
-            cursor.moveToFirst();
-            while(cursor != null){
-                String id = cursor.getString(indiceId);
-                String nome = cursor.getString(indiceNome);
-                String idade = cursor.getString(indiceIdade);
-
-                Log.i("RESULTADO - id ", id + "/nome: " + nome + "/ idade: " + idade);
-                cursor.moveToNext();
-            }
-        }
-        catch(Exception e){
-            e.printStackTrace();
-        }
 
         btn = findViewById(R.id.floatingActionButton);
         btn.setOnClickListener(new View.OnClickListener() {
