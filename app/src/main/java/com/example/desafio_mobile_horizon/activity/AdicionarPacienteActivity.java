@@ -3,11 +3,13 @@ package com.example.desafio_mobile_horizon.activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.desafio_mobile_horizon.R;
 import com.example.desafio_mobile_horizon.helper.PacienteDAO;
@@ -74,7 +76,10 @@ public class AdicionarPacienteActivity extends AppCompatActivity {
                 int semanaEUA = parseInt(editSemanaEUA.getText().toString());
                 String situacao;
 
-
+                if (nome.equals(null) || tempCorporal < 30.0) {
+                    Toast.makeText(getApplicationContext(), "Dados inválidos", Toast.LENGTH_SHORT).show();
+                    return false;
+                }
 
                 if(semanaItalia <= 6 || semanaChina <= 6 || semanaIndonesia <= 6 || semanaPortugal <= 6 || semanaEUA <= 6){
                     if(idade > 60 || idade < 10){
