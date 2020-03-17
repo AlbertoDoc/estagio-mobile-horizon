@@ -1,25 +1,22 @@
 package com.example.desafio_mobile_horizon.activity;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.ColorStateList;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.desafio_mobile_horizon.R;
 import com.example.desafio_mobile_horizon.adapter.PacienteAdapter;
-import com.example.desafio_mobile_horizon.helper.DbHelper;
 import com.example.desafio_mobile_horizon.helper.PacienteDAO;
 import com.example.desafio_mobile_horizon.helper.RecyclerItemClickListener;
 import com.example.desafio_mobile_horizon.model.Paciente;
@@ -34,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private PacienteAdapter pacienteAdapter;
     private List<Paciente> listaPacientes = new ArrayList<>();
+    private Paciente pacienteSelecionado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +55,36 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void onLongItemClick(View view, int position) {
-                                Log.i("clique", "onLongItemClick");
+
+                                Log.i("INFO", "clicou e segurou");
+
+                                pacienteSelecionado = listaPacientes.get(position);
+
+                                AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+
+                                dialog.setTitle("Confirmar exclusão");
+                                dialog.setMessage("Deseja excluir o/a paciente " + pacienteSelecionado.getNomePaciente() + "?");
+
+                                //Configurando botão sim
+                                dialog.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                            PacienteDAO pacienteDAO = new PacienteDAO(getApplicationContext());
+                                            if(pacienteDAO.deletar(pacienteSelecionado)){
+                                                carregarPacientes();
+                                                Toast.makeText(getApplicationContext(), "Sucesso ao excluir paciente", Toast.LENGTH_SHORT).show();
+                                            }
+                                            else{
+                                                Toast.makeText(getApplicationContext(), "Erro ao excluir paciente", Toast.LENGTH_SHORT).show();
+                                            }
+                                    }
+                                });
+
+                                //Configurando botão negativo
+                                dialog.setNegativeButton("Não", null);
+
+                                dialog.create();
+                                dialog.show();
                             }
 
                             @Override

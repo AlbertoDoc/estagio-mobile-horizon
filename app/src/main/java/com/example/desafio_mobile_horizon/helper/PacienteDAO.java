@@ -53,7 +53,19 @@ public class PacienteDAO implements IPacienteDAO{
 
     @Override
     public boolean deletar(Paciente paciente) {
-        return false;
+
+        try{
+            String[] args = {paciente.getId().toString()};
+            escreve.delete(DbHelper.TABELA_PACIENTES, "id=?", args);
+            Log.i("INFO", "Paciente removido com sucesso");
+        }
+        catch(Exception e){
+            Log.e("INFO", "Erro ao remover paciente");
+            e.printStackTrace();
+            return false;
+        }
+
+        return true;
     }
 
     @Override
@@ -81,6 +93,7 @@ public class PacienteDAO implements IPacienteDAO{
             int semanaEUA = c.getInt(c.getColumnIndex("semanaEUA"));
             String situacao = c.getString(c.getColumnIndex("situacao"));
 
+            paciente.setId(id);
             paciente.setNomePaciente(nome);
             paciente.setIdade(idade);
             paciente.setTemperaturaCorporal(tempCorporal);
