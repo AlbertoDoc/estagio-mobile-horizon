@@ -50,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
                         new RecyclerItemClickListener.OnItemClickListener() {
                             @Override
                             public void onItemClick(View view, int position) {
+                                //Método chamado quando clica em um item da view
+                                //Não será usado
                                 Log.i("clique", "onItemClick");
                             }
 

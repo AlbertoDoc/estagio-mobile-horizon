@@ -3,9 +3,7 @@ package com.example.desafio_mobile_horizon.activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
@@ -76,12 +74,16 @@ public class AdicionarPacienteActivity extends AppCompatActivity {
                 int semanaEUA = parseInt(editSemanaEUA.getText().toString());
                 String situacao;
 
+                //Verificando se foi digitado um nome ou uma temperatura corporal inválida
                 if (nome.equals(null) || tempCorporal < 30.0) {
                     Toast.makeText(getApplicationContext(), "Dados inválidos", Toast.LENGTH_SHORT).show();
                     return false;
                 }
 
-                if(semanaItalia <= 6 || semanaChina <= 6 || semanaIndonesia <= 6 || semanaPortugal <= 6 || semanaEUA <= 6){
+                //Tratando a entrada de dados para definir a situação do paciente
+                if((semanaItalia <= 6 && semanaItalia != 0) || (semanaChina <= 6 && semanaChina !=0) ||
+                        (semanaIndonesia <= 6 && semanaIndonesia!=0) || (semanaPortugal <= 6 && semanaPortugal!=0) ||
+                        (semanaEUA <= 6 && semanaEUA!=0)){
                     if(idade > 60 || idade < 10){
                         if(diasTosse >= 5 && diasDorCabeca >= 5 && tempCorporal > 37.0){
                             situacao = "Internado";

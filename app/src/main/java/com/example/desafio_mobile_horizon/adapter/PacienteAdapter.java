@@ -1,7 +1,6 @@
 package com.example.desafio_mobile_horizon.adapter;
 
 import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,9 +35,13 @@ public class PacienteAdapter extends RecyclerView.Adapter<PacienteAdapter.MyView
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Paciente paciente = listaPacientes.get(position);
+
+        //Usando o holder para colocar os dados para a listagem de paciente
         holder.nome.setText(paciente.getNomePaciente());
         holder.idade.setText(String.valueOf(paciente.getIdade()));
         holder.situacao.setText(paciente.getSituacao());
+
+        //Definindo cores para cada situação do paciente;
         if(paciente.getSituacao().equals("Internado")){
             holder.situacao.setTextColor(Color.RED);
         }
@@ -64,6 +67,7 @@ public class PacienteAdapter extends RecyclerView.Adapter<PacienteAdapter.MyView
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            //Recuperando os campos
             nome = itemView.findViewById(R.id.textNome);
             idade = itemView.findViewById(R.id.textIdade);
             situacao = itemView.findViewById(R.id.textSituacao);

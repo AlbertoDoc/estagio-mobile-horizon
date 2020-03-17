@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.example.desafio_mobile_horizon.model.Paciente;
 
@@ -26,6 +25,7 @@ public class PacienteDAO implements IPacienteDAO{
     @Override
     public boolean salvar(Paciente paciente) {
 
+        //Colocando valores dentro de um ContentValues
         ContentValues cv = new ContentValues();
         cv.put("nome", paciente.getNomePaciente());
         cv.put("idade", paciente.getIdade());
@@ -74,7 +74,7 @@ public class PacienteDAO implements IPacienteDAO{
         List<Paciente> pacientes = new ArrayList<>();
 
         //Essa string sql retornara os pacientes na seguinte ordem
-        // Quarentena -> Liberado -> Internado
+        // Internado -> Liberado -> Quarentena
         String sql = "SELECT * FROM " + DbHelper.TABELA_PACIENTES + " WHERE 1=1 ORDER BY situacao ASC ;";
         Cursor c = le.rawQuery(sql, null);
 

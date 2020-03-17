@@ -21,6 +21,7 @@ public class DbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
+        //Sql para criar a tabela Pacientes
         String sql = "CREATE TABLE IF NOT EXISTS " + TABELA_PACIENTES
                 + " (id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 " nome VARCHAR, idade INT(3), tempCorporal REAL, " +
@@ -38,6 +39,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        //Caso banco de dados for atualizado será este método que será chamado
+        //Não será utilizado
     }
 }
